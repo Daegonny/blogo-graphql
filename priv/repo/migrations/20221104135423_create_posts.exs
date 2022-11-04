@@ -5,7 +5,7 @@ defmodule Blogo.Repo.Migrations.CreatePosts do
     create table(:posts, primary_key: false) do
       add :id, :binary_id, primary_key: true
       add :title, :string
-      add :content, :string
+      add :content, :text
       add :views, :integer
 
       timestamps()
