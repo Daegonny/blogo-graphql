@@ -2,7 +2,6 @@ defmodule BlogoWeb.Graphql.Types.Post do
   @moduledoc """
   Post graphql object
   """
-
   use Absinthe.Schema.Notation
 
   object :post do
