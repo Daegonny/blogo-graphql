@@ -42,6 +42,8 @@ defmodule Blogo.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
+      {:absinthe, "~> 1.6"},
+      {:absinthe_plug, "~> 1.5"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
