@@ -8,5 +8,6 @@ defmodule BlogoWeb.Graphql.Types.Post do
     field(:id, non_null(:id))
     field(:title, non_null(:string))
     field(:content, non_null(:string))
+    field(:views, non_null(:integer))
   end
 end
