@@ -1,4 +1,7 @@
 defmodule Blogo.Tag do
+  @moduledoc """
+  Tag entity and schema
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
