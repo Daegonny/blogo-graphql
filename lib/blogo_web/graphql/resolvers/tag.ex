@@ -12,7 +12,7 @@ defmodule BlogoWeb.Graphql.Resolvers.Tag do
     end
   end
 
-  def all(_root, _params, _info), do: {:ok, Tags.all()}
+  def all(_parent, args, _context), do: {:ok, Tags.all(args)}
 
   def by_author(%Author{} = author, args, %{context: %{loader: loader}}),
     do: DataloaderRepo.by_parent(author, :tags, args, loader)
