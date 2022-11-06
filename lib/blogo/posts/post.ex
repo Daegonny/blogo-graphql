@@ -12,6 +12,8 @@ defmodule Blogo.Post do
     field :title, :string
     field :views, :integer
 
+    many_to_many :tags, Blogo.Tag, join_through: "posts_tags"
+    many_to_many :authors, Blogo.Author, join_through: "author_posts"
     timestamps()
   end
 

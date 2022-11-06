@@ -10,6 +10,8 @@ defmodule Blogo.Tag do
   schema "tags" do
     field :name, :string
 
+    many_to_many :posts, Blogo.Post, join_through: "posts_tags"
+    many_to_many :authors, Blogo.Author, join_through: "authors_tags"
     timestamps()
   end
 

@@ -14,5 +14,9 @@ defmodule BlogoWeb.Graphql.Types.Author do
     field(:posts, non_null(list_of(:post))) do
       resolve(&Resolvers.Post.by_author/3)
     end
+
+    field(:tags, non_null(list_of(:tag))) do
+      resolve(&Resolvers.Tag.by_author/3)
+    end
   end
 end

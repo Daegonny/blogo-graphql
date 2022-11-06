@@ -2,8 +2,7 @@ defmodule BlogoWeb.Graphql.Resolvers.Post do
   @moduledoc """
   Post graphql resolver
   """
-  import Absinthe.Resolution.Helpers, only: [on_load: 2]
-  alias Blogo.{Author, Posts}
+  alias Blogo.{Author, Posts, Tag}
   alias Blogo.Repo.DataloaderRepo
 
   def get(_root, %{id: id}, _info) do
@@ -13,16 +12,11 @@ defmodule BlogoWeb.Graphql.Resolvers.Post do
     end
   end
 
-  def all(_root, _params, _info) do
-    {:ok, Posts.all()}
-  end
+  def all(_root, _params, _info), do: {:ok, Posts.all()}
 
-  def by_author(%Author{} = author, args, %{context: %{loader: loader}}) do
-    loader
-    |> Dataloader.load(DataloaderRepo, {:posts, args}, author)
-    |> on_load(fn loader ->
-      posts = Dataloader.get(loader, DataloaderRepo, {:posts, args}, author)
-      {:ok, posts}
-    end)
-  end
+  def by_author(%Author{} = author, args, %{context: %{loader: loader}}),
+    do: DataloaderRepo.by_parent(author, :posts, args, loader)
+
+  def by_tag(%Tag{} = tag, args, %{context: %{loader: loader}}),
+    do: DataloaderRepo.by_parent(tag, :posts, args, loader)
 end
