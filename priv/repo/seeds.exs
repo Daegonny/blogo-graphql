@@ -78,27 +78,27 @@ post_5 =
   )
 
 tag_1 =
-  Repo.insert!(%Tag{name: "Ficcao"},
+  Repo.insert!(%Tag{name: "ficcao"},
     on_conflict: :nothing
   )
 
 tag_2 =
-  Repo.insert!(%Tag{name: "Romance"},
+  Repo.insert!(%Tag{name: "romance"},
     on_conflict: :nothing
   )
 
 tag_3 =
-  Repo.insert!(%Tag{name: "Extrangeiro"},
+  Repo.insert!(%Tag{name: "extrangeiro"},
     on_conflict: :nothing
   )
 
 tag_4 =
-  Repo.insert!(%Tag{name: "Nao Ficcao"},
+  Repo.insert!(%Tag{name: "nao_ficcao"},
     on_conflict: :nothing
   )
 
 tag_5 =
-  Repo.insert!(%Tag{name: "Fantasia"},
+  Repo.insert!(%Tag{name: "fantasia"},
     on_conflict: :nothing
   )
 
