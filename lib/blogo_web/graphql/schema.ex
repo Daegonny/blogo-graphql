@@ -8,7 +8,7 @@ defmodule BlogoWeb.Graphql.Schema do
     [Absinthe.Middleware.Dataloader | Absinthe.Plugin.defaults()]
   end
 
-  def dataloader() do
+  def dataloader do
     Dataloader.new()
     |> Dataloader.add_source(DataloaderRepo, DataloaderRepo.data())
   end

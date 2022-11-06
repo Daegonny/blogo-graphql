@@ -2,7 +2,7 @@ defmodule Blogo.Posts do
   @moduledoc """
   Post context
   """
-  alias Blogo.{Repo, Post}
+  alias Blogo.{Post, Repo}
 
   @spec get(binary()) :: struct() | nil
   def get(id) do
@@ -10,7 +10,7 @@ defmodule Blogo.Posts do
   end
 
   @spec all() :: list(struct())
-  def all() do
+  def all do
     Repo.all(Post)
   end
 end
