@@ -1,11 +1,19 @@
 defmodule BlogoWeb.Graphql.Schema do
   @moduledoc false
   use Absinthe.Schema
+  alias Blogo.Repo.DataloaderRepo
   alias BlogoWeb.Graphql.{Queries, Types}
 
   def plugins do
-    Absinthe.Plugin.defaults()
+    [Absinthe.Middleware.Dataloader | Absinthe.Plugin.defaults()]
   end
+
+  def dataloader() do
+    Dataloader.new()
+    |> Dataloader.add_source(DataloaderRepo, DataloaderRepo.data())
+  end
+
+  def context(ctx), do: Map.put(ctx, :loader, dataloader())
 
   import_types(Types.Tag)
   import_types(Queries.Tag)

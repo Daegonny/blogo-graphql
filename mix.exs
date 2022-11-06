@@ -44,6 +44,7 @@ defmodule Blogo.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:absinthe, "~> 1.6"},
       {:absinthe_plug, "~> 1.5"},
+      {:dataloader, "~> 1.0.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
