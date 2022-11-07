@@ -4,10 +4,10 @@ defmodule Blogo.Authors do
   """
   alias Blogo.{Author, Repo}
 
-  @spec get(binary()) :: struct() | nil
+  @spec get(binary()) :: Author.t() | nil
   def get(id), do: Repo.get(Author, id)
 
-  @spec all() :: list(struct())
+  @spec all() :: list(Author.t())
   def all do
     Repo.all(Author)
   end

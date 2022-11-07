@@ -5,6 +5,15 @@ defmodule Blogo.Author do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type t :: %__MODULE__{
+          id: binary() | nil,
+          name: String.t(),
+          age: non_neg_integer(),
+          country: String.t(),
+          inserted_at: DateTime.t() | nil,
+          updated_at: DateTime.t() | nil
+        }
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "authors" do
