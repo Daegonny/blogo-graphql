@@ -4,12 +4,12 @@ defmodule Blogo.Posts do
   """
   alias Blogo.{Post, Repo}
 
-  @spec get(binary()) :: struct() | nil
+  @spec get(binary()) :: Post.t() | nil
   def get(id) do
     Repo.get(Post, id)
   end
 
-  @spec all() :: list(struct())
+  @spec all() :: list(Post.t())
   def all do
     Repo.all(Post)
   end

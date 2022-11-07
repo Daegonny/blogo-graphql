@@ -5,6 +5,14 @@ defmodule Blogo.Post do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type t :: %__MODULE__{
+          id: binary() | nil,
+          title: String.t(),
+          views: non_neg_integer(),
+          inserted_at: DateTime.t() | nil,
+          updated_at: DateTime.t() | nil
+        }
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "posts" do
@@ -12,8 +20,8 @@ defmodule Blogo.Post do
     field :title, :string
     field :views, :integer
 
-    many_to_many :tags, Blogo.Tag, join_through: "posts_tags"
     many_to_many :authors, Blogo.Author, join_through: "author_posts"
+    many_to_many :tags, Blogo.Tag, join_through: "posts_tags"
     timestamps()
   end
 
