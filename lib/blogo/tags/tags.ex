@@ -5,13 +5,13 @@ defmodule Blogo.Tags do
   import Ecto.Query
   alias Blogo.{Repo, Tag}
 
-  @spec get(binary()) :: struct() | nil
+  @spec get(binary()) :: Tag.t() | nil
   def get(id) do
     Repo.get(Tag, id)
   end
 
-  @spec all(map()) :: list(struct())
-  def all(params) do
+  @spec all(map()) :: list(Tag.t())
+  def all(params \\ %{}) do
     params
     |> query()
     |> Repo.all()
