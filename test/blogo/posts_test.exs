@@ -123,5 +123,23 @@ defmodule Blogo.PostsTest do
 
       assert MapSet.equal?(ids, filtered_post_ids)
     end
+
+    test "apply limit, sort_by and filter simultaneously" do
+      %Post{id: id_2} = insert(:post, title: "B letra")
+      %Post{id: id_3} = insert(:post, title: "C letra")
+      %Post{id: id_1} = insert(:post, title: "A letra")
+      insert(:post, title: "D letra")
+      insert(:post, title: "1 numero")
+
+      filtered_posts =
+        Posts.all(%{
+          limit: 3,
+          filters: %{text_search: "letra"},
+          sort_by: [%{field: :title, order: :asc}]
+        })
+
+      filtered_post_ids = Enum.map(filtered_posts, & &1.id)
+      assert [id_1, id_2, id_3] == filtered_post_ids
+    end
   end
 end

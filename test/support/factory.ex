@@ -3,7 +3,7 @@ defmodule Blogo.Support.Factory do
   Factories for help testing
   """
   use ExMachina.Ecto, repo: Blogo.Repo
-  alias Faker.{Address, Person, Lorem}
+  alias Faker.{Address, Lorem, Person}
   alias Blogo.{Author, Post, Tag}
 
   @spec author_factory :: Blogo.Author.t()

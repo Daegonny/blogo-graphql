@@ -5,7 +5,7 @@ defmodule Blogo.Repo.DataloaderRepo do
   alias Blogo.{Post, Tag, Tags}
   alias Blogo.Posts.PostQueries
 
-  def query(Post, args), do: PostQueries.build(args)
+  def query(Post, %{query_params: args}), do: PostQueries.build(args)
   def query(Tag, args), do: Tags.query(args)
 
   def query(queryable, _), do: queryable
