@@ -5,14 +5,16 @@ defmodule BlogoWeb.Graphql.Resolvers.Post do
   alias Blogo.{Author, Posts, Tag}
   alias Blogo.Repo.DataloaderRepo
 
-  def get(_root, %{id: id}, _info) do
+  def get(_parent, %{id: id}, _info) do
     case Posts.get(id) do
       nil -> {:error, "Post not found"}
       post -> {:ok, post}
     end
   end
 
-  def all(_root, params, _info), do: {:ok, Posts.all(params)}
+  def all(_parent, %{query_params: params}, _info), do: {:ok, Posts.all(params)}
+
+  def all(_parent, _params, _info), do: {:ok, Posts.all()}
 
   def by_author(%Author{} = author, args, %{context: %{loader: loader}}),
     do: DataloaderRepo.by_parent(author, :posts, args, loader)
