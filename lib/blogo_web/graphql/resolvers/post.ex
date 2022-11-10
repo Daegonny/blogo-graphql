@@ -12,7 +12,7 @@ defmodule BlogoWeb.Graphql.Resolvers.Post do
     end
   end
 
-  def all(_root, _params, _info), do: {:ok, Posts.all()}
+  def all(_root, params, _info), do: {:ok, Posts.all(params)}
 
   def by_author(%Author{} = author, args, %{context: %{loader: loader}}),
     do: DataloaderRepo.by_parent(author, :posts, args, loader)

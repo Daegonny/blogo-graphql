@@ -15,6 +15,7 @@ defmodule BlogoWeb.Graphql.Queries.Post do
 
     @desc "Get all posts"
     field :posts, list_of(:post) do
+      arg(:query_params, :post_query_params)
       resolve(&Resolvers.Post.all/3)
     end
   end

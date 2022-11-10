@@ -14,6 +14,7 @@ defmodule BlogoWeb.Graphql.Types.Tag do
     end
 
     field(:posts, non_null(list_of(:post))) do
+      arg(:query_params, :post_query_params)
       resolve(&Resolvers.Post.by_tag/3)
     end
   end

@@ -12,6 +12,7 @@ defmodule BlogoWeb.Graphql.Types.Author do
     field(:country, non_null(:string))
 
     field(:posts, non_null(list_of(:post))) do
+      arg(:query_params, :post_query_params)
       resolve(&Resolvers.Post.by_author/3)
     end
 
