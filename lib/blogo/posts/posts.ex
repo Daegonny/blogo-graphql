@@ -2,6 +2,7 @@ defmodule Blogo.Posts do
   @moduledoc """
   Post context
   """
+  alias Blogo.Posts.PostQueries
   alias Blogo.{Post, Repo}
 
   @spec get(binary()) :: Post.t() | nil
@@ -9,8 +10,10 @@ defmodule Blogo.Posts do
     Repo.get(Post, id)
   end
 
-  @spec all() :: list(Post.t())
-  def all do
-    Repo.all(Post)
+  @spec all(map()) :: list(Post.t())
+  def all(params \\ %{}) do
+    params
+    |> PostQueries.build()
+    |> Repo.all()
   end
 end

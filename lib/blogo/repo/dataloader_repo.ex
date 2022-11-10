@@ -1,8 +1,11 @@
 defmodule Blogo.Repo.DataloaderRepo do
   @moduledoc false
   import Absinthe.Resolution.Helpers, only: [on_load: 2]
-  alias Blogo.{Repo, Tag, Tags}
+  alias Blogo.Repo
+  alias Blogo.{Post, Tag, Tags}
+  alias Blogo.Posts.PostQueries
 
+  def query(Post, args), do: PostQueries.build(args)
   def query(Tag, args), do: Tags.query(args)
 
   def query(queryable, _), do: queryable
