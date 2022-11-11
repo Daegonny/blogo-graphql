@@ -7,9 +7,6 @@ defmodule Blogo.Posts.PostQueries do
 
   @doc """
   Builds a query with filters, limit and order_by params
-  - :limit -> limits the result list size
-  - :sort_by -> sort results ascending or descending by following fields:
-    :title, :content, :views, :inserted_at
   """
   @spec build(map()) :: Ecto.Query.t()
   def build(params) do
