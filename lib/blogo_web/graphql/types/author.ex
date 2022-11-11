@@ -5,6 +5,7 @@ defmodule BlogoWeb.Graphql.Types.Author do
   use Absinthe.Schema.Notation
   alias BlogoWeb.Graphql.Resolvers
 
+  @desc "Object"
   object :author do
     field(:id, non_null(:id))
     field(:name, non_null(:string))
@@ -20,5 +21,32 @@ defmodule BlogoWeb.Graphql.Types.Author do
       arg(:names, list_of(:string))
       resolve(&Resolvers.Tag.by_author/3)
     end
+  end
+
+  @desc "Query input params"
+  input_object :author_query_params do
+    field(:limit, :integer)
+    field(:sort_by, list_of(:author_sorter))
+    field(:filters, :author_filter)
+  end
+
+  @desc "Available filtering fields"
+  input_object :author_filter do
+    field(:text_search, :string)
+    field(:min_age, :integer)
+    field(:max_age, :integer)
+  end
+
+  @desc "Sorter"
+  input_object :author_sorter do
+    field(:field, non_null(:author_sorting_field))
+    field(:order, non_null(:sorting_order))
+  end
+
+  @desc "Available sorting fields"
+  enum :author_sorting_field do
+    value(:name)
+    value(:country)
+    value(:age)
   end
 end
