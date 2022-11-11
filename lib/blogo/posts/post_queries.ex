@@ -7,7 +7,7 @@ defmodule Blogo.Posts.PostQueries do
   alias Blogo.Post
 
   @doc """
-  Builds a query with filters, limit and order_by params
+  Builds a post query with filters, limit and order_by params
   """
   @spec build(map()) :: Ecto.Query.t()
   def build(params), do: build_query(params, Post, &filter_query/2)
@@ -15,10 +15,12 @@ defmodule Blogo.Posts.PostQueries do
   defp filter_query(query, filters) do
     Enum.reduce(filters, query, fn
       {:text_search, value}, query ->
+        downcase_value = String.downcase(value)
+
         where(
           query,
           [post],
-          ilike(post.title, ^"%#{value}%") or ilike(post.content, ^"%#{value}%")
+          ilike(post.title, ^"%#{downcase_value}%") or ilike(post.content, ^"%#{downcase_value}%")
         )
 
       {:min_views, value}, query ->
