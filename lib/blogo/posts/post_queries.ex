@@ -3,29 +3,14 @@ defmodule Blogo.Posts.PostQueries do
   Post repo queries context
   """
   import Ecto.Query
+  import Blogo.Repo, only: [build_query: 3]
   alias Blogo.Post
 
   @doc """
   Builds a query with filters, limit and order_by params
   """
   @spec build(map()) :: Ecto.Query.t()
-  def build(params) do
-    Enum.reduce(params, Post, fn
-      {:limit, limit}, query ->
-        limit_query(query, limit)
-
-      {:filters, filters}, query ->
-        filter_query(query, filters)
-
-      {:sort_by, sorters}, query ->
-        sort_query(query, sorters)
-
-      _, query ->
-        query
-    end)
-  end
-
-  defp limit_query(query, limit), do: limit(query, ^limit)
+  def build(params), do: build_query(params, Post, &filter_query/2)
 
   defp filter_query(query, filters) do
     Enum.reduce(filters, query, fn
@@ -51,11 +36,5 @@ defmodule Blogo.Posts.PostQueries do
       _, query ->
         query
     end)
-  end
-
-  defp sort_query(query, sorters) when is_list(sorters) do
-    map_to_tuple = fn %{field: field, order: order} -> {order, field} end
-    order = Enum.map(sorters, map_to_tuple)
-    order_by(query, ^order)
   end
 end
