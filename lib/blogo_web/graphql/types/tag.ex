@@ -9,6 +9,7 @@ defmodule BlogoWeb.Graphql.Types.Tag do
   object :tag do
     field(:id, non_null(:id))
     field(:name, non_null(:string))
+    field(:inserted_at, non_null(:string))
 
     field(:authors, non_null(list_of(:author))) do
       arg(:query_params, :author_query_params)

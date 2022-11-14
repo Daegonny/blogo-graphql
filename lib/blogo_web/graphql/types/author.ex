@@ -11,6 +11,7 @@ defmodule BlogoWeb.Graphql.Types.Author do
     field(:name, non_null(:string))
     field(:age, non_null(:integer))
     field(:country, non_null(:string))
+    field(:inserted_at, non_null(:string))
 
     field(:posts, non_null(list_of(:post))) do
       arg(:query_params, :post_query_params)
