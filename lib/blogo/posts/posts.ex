@@ -15,27 +15,38 @@ defmodule Blogo.Posts do
           limit: non_neg_integer(),
           filters: %{
             search_text: String.t(),
-            min_age: non_neg_integer(),
-            max_age: non_neg_integer()
+            min_views: non_neg_integer(),
+            max_views: non_neg_integer(),
+            min_inserted_at: DateTime.t(),
+            max_inserted_at: DateTime.t()
           },
           sort_by: list(%{field: String.t(), order: atom()})
         }
 
   @doc """
     Load posts with filters, limit and order_by params
-  - :limit -> limits the result list size
-  - :sort_by -> sort results ascending or descending by following fields:
-    :title, :content, :views, :inserted_at
-  - :filters -> filter results according by following criterias:
-    :search_text, :min_age, :max_age
+  * :limit -> limits the result list size
+  * :sort_by -> sort results ascending or descending by following fields:
+    - :title
+    - :content
+    - :views
+    - :inserted_at
+  * :filters -> filter results according by following criterias:
+    - :search_text -> :title or :content, case insensitive match ('%value%')
+    - :min_views -> :min_views greater or equal than non negative integer value
+    - :max_views -> :min_views lower or equal than non negative integer value
+    - :min_inserted_at -> :inserted_at after or equal DateTime value
+    - :max_inserted_at -> :inserted_at before or equal DateTime value
 
   ## Example:
       iex> params = %{
         limit: 10,
         filters: %{
           search_text: "text",
-          min_age: 18,
-          max_age: 80
+          min_views: 10,
+          max_views: 10_000,
+          min_inserted_at: "2001-01-01 00:00:01".
+      max_inserted_at: "2020-01-01 00:00:01"
         },
         sort_by: [
           %{ field: :title, order: :asc },
