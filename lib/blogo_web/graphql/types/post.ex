@@ -14,10 +14,12 @@ defmodule BlogoWeb.Graphql.Types.Post do
     field(:inserted_at, non_null(:string))
 
     field(:tags, non_null(list_of(:tag))) do
+      arg(:query_params, :tag_query_params)
       resolve(&Resolvers.Tag.by_post/3)
     end
 
     field(:authors, non_null(list_of(:author))) do
+      arg(:query_params, :author_query_params)
       resolve(&Resolvers.Author.by_post/3)
     end
   end

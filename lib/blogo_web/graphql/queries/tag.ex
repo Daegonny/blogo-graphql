@@ -14,7 +14,7 @@ defmodule BlogoWeb.Graphql.Queries.Tag do
 
     @desc "Get all tags"
     field :tags, list_of(:tag) do
-      arg(:names, list_of(:string))
+      arg(:query_params, :tag_query_params)
       resolve(&Resolvers.Tag.all/3)
     end
   end
