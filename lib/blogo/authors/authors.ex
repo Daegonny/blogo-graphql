@@ -2,9 +2,9 @@ defmodule Blogo.Authors do
   @moduledoc """
   Author context
   """
-  alias Faker.DateTime
   alias Blogo.Authors.AuthorQueries
   alias Blogo.{Author, Repo}
+  alias Faker.DateTime
 
   @doc """
   Get an author by id.
