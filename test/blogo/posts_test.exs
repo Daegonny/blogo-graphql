@@ -124,7 +124,7 @@ defmodule Blogo.PostsTest do
       assert MapSet.equal?(ids, filtered_post_ids)
     end
 
-    test "apply limit, sort_by and filter simultaneously" do
+    test "applies limit, sort_by and filter simultaneously" do
       %Post{id: id_2} = insert(:post, title: "B letra")
       %Post{id: id_3} = insert(:post, title: "C letra")
       %Post{id: id_1} = insert(:post, title: "A letra")
