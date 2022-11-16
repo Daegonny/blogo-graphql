@@ -7,7 +7,7 @@ defmodule BlogoWeb.Graphql.Resolvers.Tag do
 
   def get(_root, %{id: id}, _info) do
     case Tags.get(id) do
-      nil -> {:error, "Tag not found"}
+      nil -> {:error, :not_found}
       tag -> {:ok, tag}
     end
   end

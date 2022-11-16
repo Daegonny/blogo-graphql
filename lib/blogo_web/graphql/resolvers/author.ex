@@ -7,7 +7,7 @@ defmodule BlogoWeb.Graphql.Resolvers.Author do
 
   def get(_parent, %{id: id}, _info) do
     case Authors.get(id) do
-      nil -> {:error, "Author not found"}
+      nil -> {:error, :not_found}
       author -> {:ok, author}
     end
   end

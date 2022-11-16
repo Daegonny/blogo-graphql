@@ -7,7 +7,7 @@ defmodule BlogoWeb.Graphql.Resolvers.Post do
 
   def get(_parent, %{id: id}, _info) do
     case Posts.get(id) do
-      nil -> {:error, "Post not found"}
+      nil -> {:error, :not_found}
       post -> {:ok, post}
     end
   end
