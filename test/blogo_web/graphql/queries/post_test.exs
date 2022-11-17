@@ -2,8 +2,8 @@ defmodule BlogoWeb.Graphql.Queries.PostTest do
   @moduledoc false
   use Blogo.DataCase, async: true
   import Blogo.Support.Factory
-  alias BlogoWeb.Graphql.Schema
   alias Blogo.Post
+  alias BlogoWeb.Graphql.Schema
 
   describe "post query" do
     test "returns existing post" do

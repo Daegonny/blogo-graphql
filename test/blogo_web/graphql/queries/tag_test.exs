@@ -2,8 +2,8 @@ defmodule BlogoWeb.Graphql.Queries.TagTest do
   @moduledoc false
   use Blogo.DataCase, async: true
   import Blogo.Support.Factory
-  alias BlogoWeb.Graphql.Schema
   alias Blogo.Tag
+  alias BlogoWeb.Graphql.Schema
 
   describe "tag query" do
     test "returns existing tag" do
