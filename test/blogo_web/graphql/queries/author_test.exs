@@ -3,7 +3,7 @@ defmodule BlogoWeb.Graphql.Queries.AuthorTest do
   use Blogo.DataCase, async: true
   import Blogo.Support.Factory
   alias BlogoWeb.Graphql.Schema
-  alias Blogo.Author
+  alias Blogo.{Author, Repo, Post, Tag}
 
   describe "author query" do
     test "returns existing author" do
@@ -137,6 +137,112 @@ defmodule BlogoWeb.Graphql.Queries.AuthorTest do
 
       filtered_author_ids = Enum.map(filtered_authors, & &1["id"])
       assert [id_1, id_2, id_3] == filtered_author_ids
+    end
+
+    test "applies limit, sort_by and filter to post children nodes" do
+      author = insert(:author)
+
+      %Post{id: id_2} = post_2 = insert(:post, title: "B letra")
+      %Post{id: id_3} = post_3 = insert(:post, title: "C letra")
+      %Post{id: id_1} = post_1 = insert(:post, title: "A letra")
+      post_4 = insert(:post, title: "D letra")
+      post_5 = insert(:post, title: "1 numero")
+
+      {5, _} =
+        Repo.insert_all(
+          "authors_posts",
+          Enum.map(
+            [post_1, post_2, post_3, post_4, post_5],
+            &%{
+              id: Ecto.UUID.dump!(Ecto.UUID.generate()),
+              author_id: Ecto.UUID.dump!(author.id),
+              post_id: Ecto.UUID.dump!(&1.id)
+            }
+          )
+        )
+
+      query = """
+      query{
+        authors{
+          id
+          posts(queryParams: {
+            limit: 3,
+            filters: {
+              textSearch: "letra"
+            },
+            sortBy: [
+              {
+                field: TITLE,
+                order: ASC
+              }
+            ]
+          }){
+            id
+            title
+            content
+            views
+            inserted_at
+          }
+        }
+      }
+      """
+
+      assert %{data: %{"authors" => [%{"posts" => filtered_posts}]}} =
+               Absinthe.run!(query, Schema)
+
+      filtered_post_ids = Enum.map(filtered_posts, & &1["id"])
+      assert [id_1, id_2, id_3] == filtered_post_ids
+    end
+
+    test "applies limit, sort_by and filter to tag children nodes" do
+      author = insert(:author)
+
+      %Tag{id: id_2} = tag_2 = insert(:tag, name: "B letra")
+      %Tag{id: id_3} = tag_3 = insert(:tag, name: "C letra")
+      %Tag{id: id_1} = tag_1 = insert(:tag, name: "A letra")
+      tag_4 = insert(:tag, name: "D letra")
+      tag_5 = insert(:tag, name: "1 numero")
+
+      {5, _} =
+        Repo.insert_all(
+          "authors_tags",
+          Enum.map(
+            [tag_1, tag_2, tag_3, tag_4, tag_5],
+            &%{
+              id: Ecto.UUID.dump!(Ecto.UUID.generate()),
+              author_id: Ecto.UUID.dump!(author.id),
+              tag_id: Ecto.UUID.dump!(&1.id)
+            }
+          )
+        )
+
+      query = """
+      query{
+        authors{
+          id
+          tags(queryParams: {
+            limit: 3,
+            filters: {
+              textSearch: "letra"
+            },
+            sortBy: [
+              {
+                field: NAME,
+                order: ASC
+              }
+            ]
+          }){
+            id
+            name
+          }
+        }
+      }
+      """
+
+      assert %{data: %{"authors" => [%{"tags" => filtered_tags}]}} = Absinthe.run!(query, Schema)
+
+      filtered_tag_ids = Enum.map(filtered_tags, & &1["id"])
+      assert [id_1, id_2, id_3] == filtered_tag_ids
     end
   end
 end

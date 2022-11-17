@@ -2,8 +2,8 @@ defmodule BlogoWeb.Graphql.Queries.TagTest do
   @moduledoc false
   use Blogo.DataCase, async: true
   import Blogo.Support.Factory
-  alias Blogo.Tag
   alias BlogoWeb.Graphql.Schema
+  alias Blogo.{Author, Repo, Post, Tag}
 
   describe "tag query" do
     test "returns existing tag" do
@@ -122,6 +122,115 @@ defmodule BlogoWeb.Graphql.Queries.TagTest do
 
       filtered_tag_ids = Enum.map(filtered_tags, & &1["id"])
       assert [id_1, id_2, id_3] == filtered_tag_ids
+    end
+
+    test "applies limit, sort_by and filter to author children nodes" do
+      tag = insert(:tag)
+
+      %Author{id: id_2} = author_2 = insert(:author, name: "B letra")
+      %Author{id: id_3} = author_3 = insert(:author, name: "C letra")
+      %Author{id: id_1} = author_1 = insert(:author, name: "A letra")
+      author_4 = insert(:author, name: "D letra")
+      author_5 = insert(:author, name: "1 numero")
+
+      {5, _} =
+        Repo.insert_all(
+          "authors_tags",
+          Enum.map(
+            [author_1, author_2, author_3, author_4, author_5],
+            &%{
+              id: Ecto.UUID.dump!(Ecto.UUID.generate()),
+              author_id: Ecto.UUID.dump!(&1.id),
+              tag_id: Ecto.UUID.dump!(tag.id)
+            }
+          )
+        )
+
+      query = """
+      query{
+        tags{
+          id
+          authors(queryParams: {
+            limit: 3,
+            filters: {
+              textSearch: "letra"
+            },
+            sortBy: [
+              {
+                field: NAME,
+                order: ASC
+              }
+            ]
+          }){
+            id
+            name
+            country
+            age
+            inserted_at
+          }
+        }
+      }
+      """
+
+      assert %{data: %{"tags" => [%{"authors" => filtered_authors}]}} =
+               Absinthe.run!(query, Schema)
+
+      filtered_author_ids = Enum.map(filtered_authors, & &1["id"])
+      assert [id_1, id_2, id_3] == filtered_author_ids
+    end
+
+    test "applies limit, sort_by and filter to post children nodes" do
+      tag = insert(:tag)
+
+      %Post{id: id_2} = post_2 = insert(:post, title: "B letra")
+      %Post{id: id_3} = post_3 = insert(:post, title: "C letra")
+      %Post{id: id_1} = post_1 = insert(:post, title: "A letra")
+      post_4 = insert(:post, title: "D letra")
+      post_5 = insert(:post, title: "1 numero")
+
+      {5, _} =
+        Repo.insert_all(
+          "posts_tags",
+          Enum.map(
+            [post_1, post_2, post_3, post_4, post_5],
+            &%{
+              id: Ecto.UUID.dump!(Ecto.UUID.generate()),
+              tag_id: Ecto.UUID.dump!(tag.id),
+              post_id: Ecto.UUID.dump!(&1.id)
+            }
+          )
+        )
+
+      query = """
+      query{
+        tags{
+          id
+          posts(queryParams: {
+            limit: 3,
+            filters: {
+              textSearch: "letra"
+            },
+            sortBy: [
+              {
+                field: TITLE,
+                order: ASC
+              }
+            ]
+          }){
+            id
+            title
+            content
+            views
+            inserted_at
+          }
+        }
+      }
+      """
+
+      assert %{data: %{"tags" => [%{"posts" => filtered_posts}]}} = Absinthe.run!(query, Schema)
+
+      filtered_post_ids = Enum.map(filtered_posts, & &1["id"])
+      assert [id_1, id_2, id_3] == filtered_post_ids
     end
   end
 end
