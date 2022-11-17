@@ -14,6 +14,7 @@ defmodule BlogoWeb.Graphql.Queries.Author do
 
     @desc "Get all authors"
     field :authors, list_of(:author) do
+      arg(:query_params, :author_query_params)
       resolve(&Resolvers.Author.all/3)
     end
   end
