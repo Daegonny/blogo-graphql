@@ -10,6 +10,8 @@ defmodule BlogoWeb.Router do
 
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: BlogoWeb.Graphql.Schema,
+      analyze_complexity: true,
+      max_complexity: Application.fetch_env!(:blogo, :query_complexity_limit),
       interface: :simple,
       context: %{pubsub: BlogoWeb.Endpoint}
   end

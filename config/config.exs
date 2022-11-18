@@ -27,6 +27,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :blogo, query_depth_limit: 5
+config :blogo, query_complexity_limit: 25
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
