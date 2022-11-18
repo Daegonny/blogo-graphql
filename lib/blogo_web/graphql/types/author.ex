@@ -7,7 +7,7 @@ defmodule BlogoWeb.Graphql.Types.Author do
 
   @desc "Object"
   object :author do
-    field(:id, non_null(:id))
+    field(:id, non_null(:uuid))
     field(:name, non_null(:string))
     field(:age, non_null(:integer))
     field(:country, non_null(:string))

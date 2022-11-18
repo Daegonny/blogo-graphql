@@ -7,7 +7,7 @@ defmodule BlogoWeb.Graphql.Types.Tag do
 
   @desc "Object"
   object :tag do
-    field(:id, non_null(:id))
+    field(:id, non_null(:uuid))
     field(:name, non_null(:string))
     field(:inserted_at, non_null(:date_time))
 

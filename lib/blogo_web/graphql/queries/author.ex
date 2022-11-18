@@ -8,7 +8,7 @@ defmodule BlogoWeb.Graphql.Queries.Author do
   object :author_queries do
     @desc "Get author by id"
     field :author, :author do
-      arg(:id, non_null(:id))
+      arg(:id, non_null(:uuid))
       resolve(&Resolvers.Author.get/3)
     end
 

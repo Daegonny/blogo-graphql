@@ -8,7 +8,7 @@ defmodule BlogoWeb.Graphql.Queries.Tag do
   object :tag_queries do
     @desc "Get tag by id"
     field :tag, :tag do
-      arg(:id, non_null(:id))
+      arg(:id, non_null(:uuid))
       resolve(&Resolvers.Tag.get/3)
     end
 

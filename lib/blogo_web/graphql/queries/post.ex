@@ -9,7 +9,7 @@ defmodule BlogoWeb.Graphql.Queries.Post do
   object :post_queries do
     @desc "Get post by id"
     field :post, :post do
-      arg(:id, non_null(:id))
+      arg(:id, non_null(:uuid))
       resolve(&Resolvers.Post.get/3)
     end
 

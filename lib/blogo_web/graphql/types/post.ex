@@ -7,7 +7,7 @@ defmodule BlogoWeb.Graphql.Types.Post do
 
   @desc "Object"
   object :post do
-    field(:id, non_null(:id))
+    field(:id, non_null(:uuid))
     field(:title, non_null(:string))
     field(:content, non_null(:string))
     field(:views, non_null(:integer))
