@@ -11,7 +11,7 @@ defmodule BlogoWeb.Graphql.Types.Author do
     field(:name, non_null(:string))
     field(:age, non_null(:integer))
     field(:country, non_null(:string))
-    field(:inserted_at, non_null(:string))
+    field(:inserted_at, non_null(:date_time))
 
     field(:posts, non_null(list_of(:post))) do
       arg(:query_params, :post_query_params)
@@ -36,6 +36,8 @@ defmodule BlogoWeb.Graphql.Types.Author do
     field(:text_search, :string)
     field(:min_age, :integer)
     field(:max_age, :integer)
+    field(:min_inserted_at, :date_time)
+    field(:max_inserted_at, :date_time)
   end
 
   @desc "Sorter"
@@ -49,5 +51,6 @@ defmodule BlogoWeb.Graphql.Types.Author do
     value(:name)
     value(:country)
     value(:age)
+    value(:inserted_at)
   end
 end

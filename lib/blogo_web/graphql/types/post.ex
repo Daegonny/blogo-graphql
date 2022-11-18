@@ -11,7 +11,7 @@ defmodule BlogoWeb.Graphql.Types.Post do
     field(:title, non_null(:string))
     field(:content, non_null(:string))
     field(:views, non_null(:integer))
-    field(:inserted_at, non_null(:string))
+    field(:inserted_at, non_null(:date_time))
 
     field(:tags, non_null(list_of(:tag))) do
       arg(:query_params, :tag_query_params)
@@ -36,8 +36,8 @@ defmodule BlogoWeb.Graphql.Types.Post do
     field(:text_search, :string)
     field(:min_views, :integer)
     field(:max_views, :integer)
-    field(:min_inserted_at, :string)
-    field(:max_inserted_at, :string)
+    field(:min_inserted_at, :date_time)
+    field(:max_inserted_at, :date_time)
   end
 
   @desc "Sorter"

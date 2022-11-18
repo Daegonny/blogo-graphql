@@ -26,6 +26,7 @@ defmodule BlogoWeb.Graphql.Schema do
   import_types(Queries.Author)
 
   import_types(Types.Sorting)
+  import_types(Types.Scalar.DateTime)
 
   query do
     import_fields(:tag_queries)

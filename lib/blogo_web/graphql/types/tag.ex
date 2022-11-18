@@ -9,7 +9,7 @@ defmodule BlogoWeb.Graphql.Types.Tag do
   object :tag do
     field(:id, non_null(:id))
     field(:name, non_null(:string))
-    field(:inserted_at, non_null(:string))
+    field(:inserted_at, non_null(:date_time))
 
     field(:authors, non_null(list_of(:author))) do
       arg(:query_params, :author_query_params)
@@ -32,8 +32,8 @@ defmodule BlogoWeb.Graphql.Types.Tag do
   @desc "Available filtering fields"
   input_object :tag_filter do
     field(:text_search, :string)
-    field(:min_inserted_at, :string)
-    field(:max_inserted_at, :string)
+    field(:min_inserted_at, :date_time)
+    field(:max_inserted_at, :date_time)
   end
 
   @desc "Sorter"
