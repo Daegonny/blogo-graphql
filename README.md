@@ -193,7 +193,7 @@ resulting:
 ## Performance Security
 
 Since graphql APIs allows the consumer to choose fields and relations, it is prudent to the backend to implement some limits.
-The Blogo project implents complexity limit and depth limit. A query could not ask for more than 25 fields and cannot have a depth level above 5.
+The Blogo project implents complexity limit and depth limit. A query could not ask for more than 250 fields and cannot have a depth level above 5.
 
 Even though dataloader helps us reducing database round trips, this kind of approach prevents heavy load queries to be executed.
 

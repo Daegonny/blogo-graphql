@@ -23,5 +23,7 @@ config :blogo, BlogoWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
+config :blogo, query_complexity_limit: 25
+
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
