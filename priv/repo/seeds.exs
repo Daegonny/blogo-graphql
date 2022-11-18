@@ -88,7 +88,7 @@ tag_2 =
   )
 
 tag_3 =
-  Repo.insert!(%Tag{name: "extrangeiro"},
+  Repo.insert!(%Tag{name: "estrangeiro"},
     on_conflict: :nothing
   )
 
@@ -154,7 +154,7 @@ tag_5 =
       id: Ecto.UUID.dump!(Ecto.UUID.generate()),
       # Bryson
       author_id: Ecto.UUID.dump!(author_1.id),
-      # Extrangeiro
+      # estrangeiro
       tag_id: Ecto.UUID.dump!(tag_4.id)
     },
     %{
@@ -221,7 +221,7 @@ tag_5 =
       id: Ecto.UUID.dump!(Ecto.UUID.generate()),
       # Breve Historia
       post_id: Ecto.UUID.dump!(post_3.id),
-      # Extrangeiro
+      # estrangeiro
       tag_id: Ecto.UUID.dump!(tag_3.id)
     },
     %{

@@ -54,7 +54,7 @@ resulting:
             "insertedAt": "2022-11-06T20:03:58Z",
             "tags": [
               {
-                "name": "extrangeiro"
+                "name": "estrangeiro"
               },
               {
                 "name": "nao_ficcao"
@@ -158,7 +158,7 @@ resulting:
       "tags": [
         {
           "authors": [],
-          "name": "extrangeiro"
+          "name": "estrangeiro"
         },
         {
           "authors": [
