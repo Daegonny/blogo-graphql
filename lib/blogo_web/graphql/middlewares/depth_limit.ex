@@ -14,10 +14,10 @@ defmodule BlogoWeb.Graphql.Middlewares.DepthLimit do
     end
   end
 
-  def depth(selections, depth \\ 0)
-  def depth([], depth), do: depth
+  defp depth(selections, depth \\ 0)
+  defp depth([], depth), do: depth
 
-  def depth(selections, depth) do
+  defp depth(selections, depth) do
     selections
     |> Enum.map(&depth(&1.selections, depth + 1))
     |> Enum.max()
