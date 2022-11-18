@@ -1,5 +1,21 @@
 # Blogo
 
+## Installing and Starting the project
+
+Install:
+
+  * Elixir 1.13.4
+  * Erlang/OTP 24
+  * Postgres SQL  13.0
+
+To start your Phoenix server:
+
+  * Install dependencies with `mix deps.get`
+  * Create and migrate your database with `mix ecto.setup`
+  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+
+Now you can visit [`localhost:4000/graphiql`](http://localhost:4000/graphiql) from your browser and start querying.
+
 ## About
 
 Blogo is a toy project. It helped me to learn and apply graphql tools and concepts.
@@ -196,17 +212,6 @@ Since graphql APIs allows the consumer to choose fields and relations, it is pru
 The Blogo project implents complexity limit and depth limit. A query could not ask for more than 250 fields and cannot have a depth level above 5.
 
 Even though dataloader helps us reducing database round trips, this kind of approach prevents heavy load queries to be executed.
-
-## Starting the project
-
-To start your Phoenix server:
-
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
-
-Now you can visit [`localhost:4000/graphiql`](http://localhost:4000/graphiql) from your browser and start querying.
-
 
 ## Special thanks and references
 
