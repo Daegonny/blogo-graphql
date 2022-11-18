@@ -3,7 +3,7 @@ defmodule BlogoWeb.Graphql.Queries.AuthorTest do
   use Blogo.DataCase, async: true
   import Blogo.Support.Factory
   alias BlogoWeb.Graphql.Schema
-  alias Blogo.{Author, Repo, Post, Tag}
+  alias Blogo.{Author, Post, Repo, Tag}
 
   describe "author query" do
     test "returns existing author" do
@@ -35,7 +35,7 @@ defmodule BlogoWeb.Graphql.Queries.AuthorTest do
       assert MapSet.equal?(returned_fields, requested_fields)
     end
 
-    test "returns nil when author does not exists" do
+    test "returns error not found when author does not exists" do
       nonexistent_id = Ecto.UUID.generate()
 
       query = """

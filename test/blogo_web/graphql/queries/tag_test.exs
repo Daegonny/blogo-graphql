@@ -3,7 +3,7 @@ defmodule BlogoWeb.Graphql.Queries.TagTest do
   use Blogo.DataCase, async: true
   import Blogo.Support.Factory
   alias BlogoWeb.Graphql.Schema
-  alias Blogo.{Author, Repo, Post, Tag}
+  alias Blogo.{Author, Post, Repo, Tag}
 
   describe "tag query" do
     test "returns existing tag" do
@@ -32,7 +32,7 @@ defmodule BlogoWeb.Graphql.Queries.TagTest do
       assert MapSet.equal?(returned_fields, requested_fields)
     end
 
-    test "returns nil when tag does not exists" do
+    test "returns error not found when tag does not exists" do
       nonexistent_id = Ecto.UUID.generate()
 
       query = """
