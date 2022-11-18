@@ -9,7 +9,7 @@ defmodule BlogoWeb.Graphql.Types.Author do
   object :author do
     field(:id, non_null(:uuid))
     field(:name, non_null(:string))
-    field(:age, non_null(:integer))
+    field(:age, non_null(:non_negative_integer))
     field(:country, non_null(:string))
     field(:inserted_at, non_null(:date_time))
 
@@ -26,7 +26,7 @@ defmodule BlogoWeb.Graphql.Types.Author do
 
   @desc "Query input params"
   input_object :author_query_params do
-    field(:limit, :integer)
+    field(:limit, :non_negative_integer)
     field(:sort_by, list_of(:author_sorter))
     field(:filters, :author_filter)
   end
@@ -34,8 +34,8 @@ defmodule BlogoWeb.Graphql.Types.Author do
   @desc "Available filtering fields"
   input_object :author_filter do
     field(:text_search, :string)
-    field(:min_age, :integer)
-    field(:max_age, :integer)
+    field(:min_age, :non_negative_integer)
+    field(:max_age, :non_negative_integer)
     field(:min_inserted_at, :date_time)
     field(:max_inserted_at, :date_time)
   end

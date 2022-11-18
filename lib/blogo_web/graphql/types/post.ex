@@ -10,7 +10,7 @@ defmodule BlogoWeb.Graphql.Types.Post do
     field(:id, non_null(:uuid))
     field(:title, non_null(:string))
     field(:content, non_null(:string))
-    field(:views, non_null(:integer))
+    field(:views, non_null(:non_negative_integer))
     field(:inserted_at, non_null(:date_time))
 
     field(:tags, non_null(list_of(:tag))) do
@@ -26,7 +26,7 @@ defmodule BlogoWeb.Graphql.Types.Post do
 
   @desc "Query input params"
   input_object :post_query_params do
-    field(:limit, :integer)
+    field(:limit, :non_negative_integer)
     field(:sort_by, list_of(:post_sorter))
     field(:filters, :post_filter)
   end
@@ -34,8 +34,8 @@ defmodule BlogoWeb.Graphql.Types.Post do
   @desc "Available filtering fields"
   input_object :post_filter do
     field(:text_search, :string)
-    field(:min_views, :integer)
-    field(:max_views, :integer)
+    field(:min_views, :non_negative_integer)
+    field(:max_views, :non_negative_integer)
     field(:min_inserted_at, :date_time)
     field(:max_inserted_at, :date_time)
   end

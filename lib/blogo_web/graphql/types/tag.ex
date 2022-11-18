@@ -24,7 +24,7 @@ defmodule BlogoWeb.Graphql.Types.Tag do
 
   @desc "Query input params"
   input_object :tag_query_params do
-    field(:limit, :integer)
+    field(:limit, :non_negative_integer)
     field(:sort_by, list_of(:tag_sorter))
     field(:filters, :tag_filter)
   end
