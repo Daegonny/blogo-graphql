@@ -3,7 +3,7 @@ defmodule BlogoWeb.Graphql.Schema do
   use Absinthe.Schema
   alias Blogo.Repo.DataloaderRepo
   alias BlogoWeb.Graphql.{Queries, Types}
-  alias BlogoWeb.Graphql.Middleware.{ErrorHandler, SafeResolution}
+  alias BlogoWeb.Graphql.Middlewares.{DepthLimit, ErrorHandler, SafeResolution}
 
   def plugins do
     [Absinthe.Middleware.Dataloader | Absinthe.Plugin.defaults()]
@@ -34,7 +34,7 @@ defmodule BlogoWeb.Graphql.Schema do
   end
 
   def middleware(middleware, _field, %{identifier: type}) when type in [:query, :mutation],
-    do: SafeResolution.apply(middleware) ++ [ErrorHandler]
+    do: [DepthLimit] ++ SafeResolution.apply(middleware) ++ [ErrorHandler]
 
   def middleware(middleware, _field, _object), do: middleware
 end

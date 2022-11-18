@@ -33,6 +33,7 @@ defmodule Blogo.Utils.Error do
   end
 
   defp metadata(:invalid_argument), do: {400, "Invalid arguments passed"}
+  defp metadata(:query_depth_limit_exceeded), do: {400, "Query depth limit has been exceeded"}
   defp metadata(:not_found), do: {404, "Resource not found"}
   defp metadata(:unknown), do: {500, "Something went wrong"}
 end
