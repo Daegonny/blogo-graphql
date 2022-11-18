@@ -1,4 +1,4 @@
-defmodule BlogoWeb.Graphql.Middleware.SafeResolution do
+defmodule BlogoWeb.Graphql.Middlewares.SafeResolution do
   @moduledoc """
   Absinthe middleware for safe resolution exceptions.
   More info at: https://shyr.io/blog/absinthe-exception-error-handling

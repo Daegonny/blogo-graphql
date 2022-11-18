@@ -1,4 +1,4 @@
-defmodule BlogoWeb.Graphql.Middleware.ErrorHandler do
+defmodule BlogoWeb.Graphql.Middlewares.ErrorHandler do
   @moduledoc """
   Absinthe middleware for handling errors.
   More info at: https://shyr.io/blog/absinthe-exception-error-handling
