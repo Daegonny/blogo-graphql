@@ -14,6 +14,14 @@ defmodule BlogoWeb.Graphql.Types.Scalar.NonNegativeInteger do
   @spec parse_non_negative_integer(Absinthe.Blueprint.Input.Null.t()) :: {:ok, nil}
   defp parse_non_negative_integer(%Absinthe.Blueprint.Input.String{value: value}) do
     if is_integer(value) and value >= 0 do
+      {:ok, String.to_integer(value)}
+    else
+      :error
+    end
+  end
+
+  defp parse_non_negative_integer(%Absinthe.Blueprint.Input.Integer{value: value}) do
+    if is_integer(value) and value >= 0 do
       {:ok, value}
     else
       :error
