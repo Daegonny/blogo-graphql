@@ -29,6 +29,12 @@ An author wrote many posts and can be classified by many tags. Moreover a post c
 
 That is a interesting situation to work with graphql because it allows the consumer to write a query choosing which fields and relations should be loaded.
 
+## Online Hosting
+
+The app is hosted on render at [https://blogo.onrender.com/graphiql](https://blogo.onrender.com/graphiql).
+
+Due to [render free hosting constraints](https://render.com/docs/free#free-web-services) the loading time can take a little long more than expected.
+
 ## Querying
 
 You can find an author and all its posts along with its tags:
